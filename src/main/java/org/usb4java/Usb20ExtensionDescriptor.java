@@ -18,8 +18,7 @@
 
 package org.usb4java;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
+import java.util.Objects;
 
 /**
  * A structure representing the USB 2.0 Extension descriptor. This descriptor is
@@ -105,12 +104,11 @@ public final class Usb20ExtensionDescriptor
     @Override
     public int hashCode()
     {
-        return new HashCodeBuilder()
-            .append(this.bLength())
-            .append(this.bDescriptorType())
-            .append(this.bDevCapabilityType())
-            .append(this.bmAttributes())
-            .toHashCode();
+        return Objects.hash(
+            this.bLength(),
+            this.bDescriptorType(),
+            this.bDevCapabilityType(),
+            this.bmAttributes());
     }
 
     @Override
@@ -131,12 +129,10 @@ public final class Usb20ExtensionDescriptor
 
         final Usb20ExtensionDescriptor other = (Usb20ExtensionDescriptor) obj;
 
-        return new EqualsBuilder()
-            .append(this.bLength(), other.bLength())
-            .append(this.bDescriptorType(), other.bDescriptorType())
-            .append(this.bDevCapabilityType(), other.bDevCapabilityType())
-            .append(this.bmAttributes(), other.bmAttributes())
-            .isEquals();
+        return this.bLength() == other.bLength()
+            && this.bDescriptorType() == other.bDescriptorType()
+            && this.bDevCapabilityType() == other.bDevCapabilityType()
+            && this.bmAttributes() == other.bmAttributes();
     }
 
     @Override

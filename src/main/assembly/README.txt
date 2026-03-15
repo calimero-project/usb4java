@@ -8,7 +8,6 @@ The lib directory contains the following JAR files:
 
 usb4java-*.jar             (The main usb4java library)
 libusb4java-*.jar          (The native libraries for the various platforms)
-commons-lang3-*.jar        (Apache Commons Lang library needed by usb4java)
 
 If you don't want usb4java to extract the native libraries into a temporary
 directory on each program start then you might want to distribute them in

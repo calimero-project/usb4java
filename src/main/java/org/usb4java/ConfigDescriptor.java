@@ -19,9 +19,8 @@
 package org.usb4java;
 
 import java.nio.ByteBuffer;
-
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
+import java.util.Arrays;
+import java.util.Objects;
 
 /**
  * A structure representing the standard USB configuration descriptor.
@@ -169,19 +168,18 @@ public final class ConfigDescriptor
     @Override
     public int hashCode()
     {
-        return new HashCodeBuilder()
-            .append(this.bLength())
-            .append(this.bDescriptorType())
-            .append(this.wTotalLength())
-            .append(this.bNumInterfaces())
-            .append(this.bConfigurationValue())
-            .append(this.iConfiguration())
-            .append(this.bmAttributes())
-            .append(this.bMaxPower())
-            .append(this.iface())
-            .append(this.extra())
-            .append(this.extraLength())
-            .toHashCode();
+        return Objects.hash(
+            this.bLength(),
+            this.bDescriptorType(),
+            this.wTotalLength(),
+            this.bNumInterfaces(),
+            this.bConfigurationValue(),
+            this.iConfiguration(),
+            this.bmAttributes(),
+            this.bMaxPower(),
+            Arrays.hashCode(this.iface()),
+            this.extra(),
+            this.extraLength());
     }
 
     @Override
@@ -202,19 +200,17 @@ public final class ConfigDescriptor
 
         final ConfigDescriptor other = (ConfigDescriptor) obj;
 
-        return new EqualsBuilder()
-            .append(this.bLength(), other.bLength())
-            .append(this.bDescriptorType(), other.bDescriptorType())
-            .append(this.wTotalLength(), other.wTotalLength())
-            .append(this.bNumInterfaces(), other.bNumInterfaces())
-            .append(this.bConfigurationValue(), other.bConfigurationValue())
-            .append(this.iConfiguration(), other.iConfiguration())
-            .append(this.bmAttributes(), other.bmAttributes())
-            .append(this.bMaxPower(), other.bMaxPower())
-            .append(this.iface(), other.iface())
-            .append(this.extra(), other.extra())
-            .append(this.extraLength(), other.extraLength())
-            .isEquals();
+        return this.bLength() == other.bLength()
+            && this.bDescriptorType() == other.bDescriptorType()
+            && this.wTotalLength() == other.wTotalLength()
+            && this.bNumInterfaces() == other.bNumInterfaces()
+            && this.bConfigurationValue() == other.bConfigurationValue()
+            && this.iConfiguration() == other.iConfiguration()
+            && this.bmAttributes() == other.bmAttributes()
+            && this.bMaxPower() == other.bMaxPower()
+            && Arrays.equals(this.iface(), other.iface())
+            && Objects.equals(this.extra(), other.extra())
+            && this.extraLength() == other.extraLength();
     }
 
     @Override

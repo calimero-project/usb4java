@@ -19,9 +19,7 @@
 package org.usb4java;
 
 import java.nio.ByteBuffer;
-
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
+import java.util.Objects;
 
 /**
  * A structure representing the standard USB endpoint descriptor.
@@ -159,18 +157,17 @@ public final class EndpointDescriptor
     @Override
     public int hashCode()
     {
-        return new HashCodeBuilder()
-            .append(this.bLength())
-            .append(this.bDescriptorType())
-            .append(this.bEndpointAddress())
-            .append(this.bmAttributes())
-            .append(this.wMaxPacketSize())
-            .append(this.bInterval())
-            .append(this.bRefresh())
-            .append(this.bSynchAddress())
-            .append(this.extra())
-            .append(this.extraLength())
-            .toHashCode();
+        return Objects.hash(
+            this.bLength(),
+            this.bDescriptorType(),
+            this.bEndpointAddress(),
+            this.bmAttributes(),
+            this.wMaxPacketSize(),
+            this.bInterval(),
+            this.bRefresh(),
+            this.bSynchAddress(),
+            this.extra(),
+            this.extraLength());
     }
 
     @Override
@@ -191,18 +188,16 @@ public final class EndpointDescriptor
 
         final EndpointDescriptor other = (EndpointDescriptor) obj;
 
-        return new EqualsBuilder()
-            .append(this.bLength(), other.bLength())
-            .append(this.bDescriptorType(), other.bDescriptorType())
-            .append(this.bEndpointAddress(), other.bEndpointAddress())
-            .append(this.bmAttributes(), other.bmAttributes())
-            .append(this.wMaxPacketSize(), other.wMaxPacketSize())
-            .append(this.bInterval(), other.bInterval())
-            .append(this.bRefresh(), other.bRefresh())
-            .append(this.bSynchAddress(), other.bSynchAddress())
-            .append(this.extra(), other.extra())
-            .append(this.extraLength(), other.extraLength())
-            .isEquals();
+        return this.bLength() == other.bLength()
+            && this.bDescriptorType() == other.bDescriptorType()
+            && this.bEndpointAddress() == other.bEndpointAddress()
+            && this.bmAttributes() == other.bmAttributes()
+            && this.wMaxPacketSize() == other.wMaxPacketSize()
+            && this.bInterval() == other.bInterval()
+            && this.bRefresh() == other.bRefresh()
+            && this.bSynchAddress() == other.bSynchAddress()
+            && Objects.equals(this.extra(), other.extra())
+            && this.extraLength() == other.extraLength();
     }
 
     @Override

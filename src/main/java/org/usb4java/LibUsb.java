@@ -23,10 +23,9 @@ import java.io.FileDescriptor;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 import java.nio.LongBuffer;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
-
-import org.apache.commons.lang3.tuple.ImmutablePair;
 
 /**
  * Static class providing the constants and functions of libusb.
@@ -670,6 +669,49 @@ public final class LibUsb
 
     /** The next global hotplug ID to use. */
     private static long globalHotplugId = 1;
+
+
+    private static final class ImmutablePair<L, R>
+    {
+        private final L left;
+        private final R right;
+
+        ImmutablePair(L left, R right)
+        {
+            this.left  = left;
+            this.right = right;
+        }
+
+        public L getLeft()
+        {
+            return this.left;
+        }
+
+        public R getRight()
+        {
+            return this.right;
+        }
+
+        public boolean equals(Object obj)
+        {
+            if (obj == this)
+                return true;
+            if (!(obj instanceof ImmutablePair))
+                return false;
+            final ImmutablePair<?, ?> other = (ImmutablePair<?, ?>) obj;
+            return Objects.equals(this.getLeft(), other.getLeft()) && Objects.equals(this.getRight(), other.getRight());
+        }
+
+        public int hashCode()
+        {
+            return Objects.hashCode(this.getLeft()) ^ Objects.hashCode(this.getRight());
+        }
+
+        public String toString()
+        {
+            return "(" + this.getLeft() + ',' + this.getRight() + ")";
+        }
+    }
 
     /**
      * Hotplug callbacks (to correctly manage calls and additional data).

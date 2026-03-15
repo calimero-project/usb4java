@@ -27,7 +27,6 @@ natives/
     darwin-x86-64/libusb4java.dylib
 lib/
   usb4java.jar
-  commons-lang3.jar
   myapp.jar
 myapp.sh
 +-----------------------------------------------------------------------------+

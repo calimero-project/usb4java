@@ -19,9 +19,7 @@
 package org.usb4java;
 
 import java.nio.ByteBuffer;
-
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
+import java.util.Objects;
 
 /**
  * A structure representing the standard USB device descriptor.
@@ -207,22 +205,21 @@ public final class DeviceDescriptor
     @Override
     public int hashCode()
     {
-        return new HashCodeBuilder()
-            .append(this.bLength())
-            .append(this.bDescriptorType())
-            .append(this.bcdUSB())
-            .append(this.bDeviceClass())
-            .append(this.bDeviceSubClass())
-            .append(this.bDeviceProtocol())
-            .append(this.bMaxPacketSize0())
-            .append(this.idVendor())
-            .append(this.idProduct())
-            .append(this.bcdDevice())
-            .append(this.iManufacturer())
-            .append(this.iProduct())
-            .append(this.iSerialNumber())
-            .append(this.bNumConfigurations())
-            .toHashCode();
+        return Objects.hash(
+            this.bLength(),
+            this.bDescriptorType(),
+            this.bcdUSB(),
+            this.bDeviceClass(),
+            this.bDeviceSubClass(),
+            this.bDeviceProtocol(),
+            this.bMaxPacketSize0(),
+            this.idVendor(),
+            this.idProduct(),
+            this.bcdDevice(),
+            this.iManufacturer(),
+            this.iProduct(),
+            this.iSerialNumber(),
+            this.bNumConfigurations());
     }
 
     @Override
@@ -243,22 +240,20 @@ public final class DeviceDescriptor
 
         final DeviceDescriptor other = (DeviceDescriptor) obj;
 
-        return new EqualsBuilder()
-            .append(this.bLength(), other.bLength())
-            .append(this.bDescriptorType(), other.bDescriptorType())
-            .append(this.bcdUSB(), other.bcdUSB())
-            .append(this.bDeviceClass(), other.bDeviceClass())
-            .append(this.bDeviceSubClass(), other.bDeviceSubClass())
-            .append(this.bDeviceProtocol(), other.bDeviceProtocol())
-            .append(this.bMaxPacketSize0(), other.bMaxPacketSize0())
-            .append(this.idVendor(), other.idVendor())
-            .append(this.idProduct(), other.idProduct())
-            .append(this.bcdDevice(), other.bcdDevice())
-            .append(this.iManufacturer(), other.iManufacturer())
-            .append(this.iProduct(), other.iProduct())
-            .append(this.iSerialNumber(), other.iSerialNumber())
-            .append(this.bNumConfigurations(), other.bNumConfigurations())
-            .isEquals();
+        return this.bLength() == other.bLength()
+            && this.bDescriptorType() == other.bDescriptorType()
+            && this.bcdUSB() == other.bcdUSB()
+            && this.bDeviceClass() == other.bDeviceClass()
+            && this.bDeviceSubClass() == other.bDeviceSubClass()
+            && this.bDeviceProtocol() == other.bDeviceProtocol()
+            && this.bMaxPacketSize0() == other.bMaxPacketSize0()
+            && this.idVendor() == other.idVendor()
+            && this.idProduct() == other.idProduct()
+            && this.bcdDevice() == other.bcdDevice()
+            && this.iManufacturer() == other.iManufacturer()
+            && this.iProduct() == other.iProduct()
+            && this.iSerialNumber() == other.iSerialNumber()
+            && this.bNumConfigurations() == other.bNumConfigurations();
     }
 
     @Override

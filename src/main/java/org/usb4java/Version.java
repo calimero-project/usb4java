@@ -18,8 +18,7 @@
 
 package org.usb4java;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
+import java.util.Objects;
 
 /**
  * Structure providing the version of the libusb runtime.
@@ -88,13 +87,13 @@ public final class Version
     @Override
     public int hashCode()
     {
-        return new HashCodeBuilder()
-            .append(this.major())
-            .append(this.minor())
-            .append(this.micro())
-            .append(this.nano())
-            .append(this.rc())
-            .toHashCode();
+        return Objects.hash(
+                this.major(),
+                this.minor(),
+                this.micro(),
+                this.nano(),
+                this.rc()
+        );
     }
 
     @Override
@@ -115,13 +114,11 @@ public final class Version
 
         final Version other = (Version) obj;
 
-        return new EqualsBuilder()
-            .append(this.major(), other.major())
-            .append(this.minor(), other.minor())
-            .append(this.micro(), other.micro())
-            .append(this.nano(), other.nano())
-            .append(this.rc(), other.rc())
-            .isEquals();
+        return this.major() == other.major()
+            && this.minor() == other.minor()
+            && this.micro() == other.micro()
+            && this.nano() == other.nano()
+            && this.rc().equals(other.rc());
     }
 
     @Override

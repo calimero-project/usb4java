@@ -18,8 +18,7 @@
 
 package org.usb4java;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
+import java.util.Objects;
 
 /**
  * A structure representing the SuperSpeed USB Device Capability descriptor.
@@ -145,16 +144,15 @@ public final class SsUsbDeviceCapabilityDescriptor
     @Override
     public int hashCode()
     {
-        return new HashCodeBuilder()
-            .append(this.bLength())
-            .append(this.bDescriptorType())
-            .append(this.bDevCapabilityType())
-            .append(this.bmAttributes())
-            .append(this.wSpeedSupported())
-            .append(this.bFunctionalitySupport())
-            .append(this.bU1DevExitLat())
-            .append(this.bU2DevExitLat())
-            .toHashCode();
+        return Objects.hash(
+            this.bLength(),
+            this.bDescriptorType(),
+            this.bDevCapabilityType(),
+            this.bmAttributes(),
+            this.wSpeedSupported(),
+            this.bFunctionalitySupport(),
+            this.bU1DevExitLat(),
+            this.bU2DevExitLat());
     }
 
     @Override
@@ -176,16 +174,14 @@ public final class SsUsbDeviceCapabilityDescriptor
         final SsUsbDeviceCapabilityDescriptor other = 
             (SsUsbDeviceCapabilityDescriptor) obj;
 
-        return new EqualsBuilder()
-            .append(this.bLength(), other.bLength())
-            .append(this.bDescriptorType(), other.bDescriptorType())
-            .append(this.bDevCapabilityType(), other.bDevCapabilityType())
-            .append(this.bmAttributes(), other.bmAttributes())
-            .append(this.wSpeedSupported(), other.wSpeedSupported())
-            .append(this.bFunctionalitySupport(), other.bFunctionalitySupport())
-            .append(this.bU1DevExitLat(), other.bU1DevExitLat())
-            .append(this.bU2DevExitLat(), other.bU2DevExitLat())
-            .isEquals();
+        return this.bLength() == other.bLength()
+            && this.bDescriptorType() == other.bDescriptorType()
+            && this.bDevCapabilityType() == other.bDevCapabilityType()
+            && this.bmAttributes() == other.bmAttributes()
+            && this.wSpeedSupported() == other.wSpeedSupported()
+            && this.bFunctionalitySupport() == other.bFunctionalitySupport()
+            && this.bU1DevExitLat() == other.bU1DevExitLat()
+            && this.bU2DevExitLat() == other.bU2DevExitLat();
     }
 
     @Override

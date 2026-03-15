@@ -19,9 +19,7 @@
 package org.usb4java;
 
 import java.nio.ByteBuffer;
-
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
+import java.util.Objects;
 
 /**
  * A structure representing the Container ID descriptor.
@@ -118,13 +116,12 @@ public final class ContainerIdDescriptor
     @Override
     public int hashCode()
     {
-        return new HashCodeBuilder()
-            .append(this.bLength())
-            .append(this.bDescriptorType())
-            .append(this.bDevCapabilityType())
-            .append(this.bReserved())
-            .append(this.containerId())
-            .toHashCode();
+        return Objects.hash(
+            this.bLength(),
+            this.bDescriptorType(),
+            this.bDevCapabilityType(),
+            this.bReserved(),
+            this.containerId());
     }
 
     @Override
@@ -145,13 +142,11 @@ public final class ContainerIdDescriptor
 
         final ContainerIdDescriptor other = (ContainerIdDescriptor) obj;
 
-        return new EqualsBuilder()
-            .append(this.bLength(), other.bLength())
-            .append(this.bDescriptorType(), other.bDescriptorType())
-            .append(this.bDevCapabilityType(), other.bDevCapabilityType())
-            .append(this.bReserved(), other.bReserved())
-            .append(this.containerId(), other.containerId())
-            .isEquals();
+        return this.bLength() == other.bLength()
+            && this.bDescriptorType() == other.bDescriptorType()
+            && this.bDevCapabilityType() == other.bDevCapabilityType()
+            && this.bReserved() == other.bReserved()
+            && Objects.equals(this.containerId(), other.containerId());
     }
 
     @Override

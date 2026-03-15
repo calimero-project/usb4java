@@ -18,8 +18,8 @@
 
 package org.usb4java;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
+import java.util.Arrays;
+import java.util.Objects;
 
 /**
  * A collection of alternate settings for a particular USB interface.
@@ -90,10 +90,9 @@ public final class Interface
     @Override
     public int hashCode()
     {
-        return new HashCodeBuilder()
-            .append(this.altsetting())
-            .append(this.numAltsetting())
-            .toHashCode();
+        return Objects.hash(
+            Arrays.hashCode(this.altsetting()),
+            this.numAltsetting());
     }
 
     @Override
@@ -114,10 +113,8 @@ public final class Interface
 
         final Interface other = (Interface) obj;
 
-        return new EqualsBuilder()
-            .append(this.altsetting(), other.altsetting())
-            .append(this.numAltsetting(), other.numAltsetting())
-            .isEquals();
+        return Arrays.equals(this.altsetting(), other.altsetting())
+            && this.numAltsetting() == other.numAltsetting();
     }
 
     @Override

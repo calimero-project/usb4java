@@ -19,9 +19,7 @@
 package org.usb4java;
 
 import java.nio.ByteBuffer;
-
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
+import java.util.Objects;
 
 /**
  * A generic representation of a BOS Device Capability descriptor.
@@ -106,12 +104,11 @@ public final class BosDevCapabilityDescriptor
     @Override
     public int hashCode()
     {
-        return new HashCodeBuilder()
-            .append(this.bLength())
-            .append(this.bDescriptorType())
-            .append(this.bDevCapabilityType())
-            .append(this.devCapabilityData())
-            .toHashCode();
+        return Objects.hash(
+            this.bLength(),
+            this.bDescriptorType(),
+            this.bDevCapabilityType(),
+            this.devCapabilityData());
     }
 
     @Override
@@ -133,12 +130,10 @@ public final class BosDevCapabilityDescriptor
         final BosDevCapabilityDescriptor other = 
             (BosDevCapabilityDescriptor) obj;
 
-        return new EqualsBuilder()
-            .append(this.bLength(), other.bLength())
-            .append(this.bDescriptorType(), other.bDescriptorType())
-            .append(this.bDevCapabilityType(), other.bDevCapabilityType())
-            .append(this.devCapabilityData(), other.devCapabilityData()).
-            isEquals();
+        return this.bLength() == other.bLength()
+            && this.bDescriptorType() == other.bDescriptorType()
+            && this.bDevCapabilityType() == other.bDevCapabilityType()
+            && Objects.equals(this.devCapabilityData(), other.devCapabilityData());
     }
 
     @Override

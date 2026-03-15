@@ -19,9 +19,8 @@
 package org.usb4java;
 
 import java.nio.ByteBuffer;
-
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
+import java.util.Arrays;
+import java.util.Objects;
 
 /**
  * A structure representing the standard USB interface descriptor.
@@ -177,20 +176,19 @@ public final class InterfaceDescriptor
     @Override
     public int hashCode()
     {
-        return new HashCodeBuilder()
-            .append(this.bLength())
-            .append(this.bDescriptorType())
-            .append(this.bInterfaceNumber())
-            .append(this.bAlternateSetting())
-            .append(this.bNumEndpoints())
-            .append(this.bInterfaceClass())
-            .append(this.bInterfaceSubClass())
-            .append(this.bInterfaceProtocol())
-            .append(this.iInterface())
-            .append(this.endpoint())
-            .append(this.extra())
-            .append(this.extraLength())
-            .toHashCode();
+        return Objects.hash(
+            this.bLength(),
+            this.bDescriptorType(),
+            this.bInterfaceNumber(),
+            this.bAlternateSetting(),
+            this.bNumEndpoints(),
+            this.bInterfaceClass(),
+            this.bInterfaceSubClass(),
+            this.bInterfaceProtocol(),
+            this.iInterface(),
+            Arrays.hashCode(this.endpoint()),
+            this.extra(),
+            this.extraLength());
     }
 
     @Override
@@ -211,20 +209,18 @@ public final class InterfaceDescriptor
 
         final InterfaceDescriptor other = (InterfaceDescriptor) obj;
 
-        return new EqualsBuilder()
-            .append(this.bLength(), other.bLength())
-            .append(this.bDescriptorType(), other.bDescriptorType())
-            .append(this.bInterfaceNumber(), other.bInterfaceNumber())
-            .append(this.bAlternateSetting(), other.bAlternateSetting())
-            .append(this.bNumEndpoints(), other.bNumEndpoints())
-            .append(this.bInterfaceClass(), other.bInterfaceClass())
-            .append(this.bInterfaceSubClass(), other.bInterfaceSubClass())
-            .append(this.bInterfaceProtocol(), other.bInterfaceProtocol())
-            .append(this.iInterface(), other.iInterface())
-            .append(this.endpoint(), other.endpoint())
-            .append(this.extra(), other.extra())
-            .append(this.extraLength(), other.extraLength())
-            .isEquals();
+        return this.bLength() == other.bLength()
+            && this.bDescriptorType() == other.bDescriptorType()
+            && this.bInterfaceNumber() == other.bInterfaceNumber()
+            && this.bAlternateSetting() == other.bAlternateSetting()
+            && this.bNumEndpoints() == other.bNumEndpoints()
+            && this.bInterfaceClass() == other.bInterfaceClass()
+            && this.bInterfaceSubClass() == other.bInterfaceSubClass()
+            && this.bInterfaceProtocol() == other.bInterfaceProtocol()
+            && this.iInterface() == other.iInterface()
+            && Arrays.equals(this.endpoint(), other.endpoint())
+            && Objects.equals(this.extra(), other.extra())
+            && this.extraLength() == other.extraLength();
     }
 
     @Override

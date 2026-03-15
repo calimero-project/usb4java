@@ -18,8 +18,7 @@
 
 package org.usb4java;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
+import java.util.Objects;
 
 /**
  * A structure representing the superspeed endpoint companion descriptor.
@@ -119,13 +118,12 @@ public final class SsEndpointCompanionDescriptor
     @Override
     public int hashCode()
     {
-        return new HashCodeBuilder()
-            .append(this.bLength())
-            .append(this.bDescriptorType())
-            .append(this.bMaxBurst())
-            .append(this.bmAttributes())
-            .append(this.wBytesPerInterval())
-            .toHashCode();
+        return Objects.hash(
+            this.bLength(),
+            this.bDescriptorType(),
+            this.bMaxBurst(),
+            this.bmAttributes(),
+            this.wBytesPerInterval());
     }
 
     @Override
@@ -147,13 +145,11 @@ public final class SsEndpointCompanionDescriptor
         final SsEndpointCompanionDescriptor other =
             (SsEndpointCompanionDescriptor) obj;
 
-        return new EqualsBuilder()
-            .append(this.bLength(), other.bLength())
-            .append(this.bDescriptorType(), other.bDescriptorType())
-            .append(this.bMaxBurst(), other.bMaxBurst())
-            .append(this.bmAttributes(), other.bmAttributes())
-            .append(this.wBytesPerInterval(), other.wBytesPerInterval())
-            .isEquals();
+        return this.bLength() == other.bLength()
+            && this.bDescriptorType() == other.bDescriptorType()
+            && this.bMaxBurst() == other.bMaxBurst()
+            && this.bmAttributes() == other.bmAttributes()
+            && this.wBytesPerInterval() == other.wBytesPerInterval();
     }
 
     @Override

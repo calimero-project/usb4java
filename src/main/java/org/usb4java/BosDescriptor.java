@@ -18,8 +18,8 @@
 
 package org.usb4java;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
+import java.util.Arrays;
+import java.util.Objects;
 
 /**
  * A structure representing the Binary Device Object Store (BOS) descriptor.
@@ -119,13 +119,12 @@ public final class BosDescriptor
     @Override
     public int hashCode()
     {
-        return new HashCodeBuilder()
-            .append(this.bLength())
-            .append(this.bDescriptorType())
-            .append(this.wTotalLength())
-            .append(this.bNumDeviceCaps())
-            .append(this.devCapability())
-            .toHashCode();
+        return Objects.hash(
+            this.bLength(),
+            this.bDescriptorType(),
+            this.wTotalLength(),
+            this.bNumDeviceCaps(),
+            Arrays.hashCode(this.devCapability()));
     }
 
     @Override
@@ -146,13 +145,11 @@ public final class BosDescriptor
 
         final BosDescriptor other = (BosDescriptor) obj;
 
-        return new EqualsBuilder()
-            .append(this.bLength(), other.bLength())
-            .append(this.bDescriptorType(), other.bDescriptorType())
-            .append(this.wTotalLength(), other.wTotalLength())
-            .append(this.bNumDeviceCaps(), other.bNumDeviceCaps())
-            .append(this.devCapability(), other.devCapability())
-            .isEquals();
+        return this.bLength() == other.bLength()
+                && this.bDescriptorType() == other.bDescriptorType()
+                && this.wTotalLength() == other.wTotalLength()
+                && this.bNumDeviceCaps() == other.bNumDeviceCaps()
+                && Arrays.equals(this.devCapability(), other.devCapability());
     }
 
     @Override
