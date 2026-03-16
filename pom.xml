@@ -348,6 +348,18 @@
       <version>${libusb4java.version}</version>
       <classifier>linux-aarch64</classifier>
     </dependency>
+    <dependency>
+      <groupId>io.calimero</groupId>
+      <artifactId>libusb4java</artifactId>
+      <version>1.3.1</version>
+      <classifier>win-aarch64-static</classifier>
+    </dependency>
+    <dependency>
+      <groupId>io.calimero</groupId>
+      <artifactId>libusb4java</artifactId>
+      <version>1.3.1</version>
+      <classifier>darwin-aarch64-static</classifier>
+    </dependency>
   </dependencies>
 
 </project>
