@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.Files;
 
 /**
  * Utility class to load native libraries from classpath.
@@ -138,16 +139,7 @@ public final class Loader
 
         try
         {
-            tmp = File.createTempFile("usb4java", null);
-            if (!tmp.delete())
-            {
-                throw new IOException("Unable to delete temporary file " + tmp);
-            }
-            if (!tmp.mkdirs())
-            {
-                throw new IOException("Unable to create temporary directory "
-                    + tmp);
-            }
+            tmp = Files.createTempDirectory("usb4java").toFile();
             tmp.deleteOnExit();
             return tmp;
         }
