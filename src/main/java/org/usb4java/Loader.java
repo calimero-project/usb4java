@@ -6,7 +6,6 @@
 package org.usb4java;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
@@ -20,9 +19,6 @@ import java.nio.file.Files;
  */
 public final class Loader
 {
-    /** Buffer size used for copying data. */
-    private static final int BUFFER_SIZE = 8192;
-
     /** The temporary directory for native libraries. */
     private static File tmp;
 
@@ -186,35 +182,6 @@ public final class Loader
     }
 
     /**
-     * Copies the specified input stream to the specified output file.
-     *
-     * @param input
-     *            The input stream.
-     * @param output
-     *            The output file.
-     * @throws IOException
-     *             If copying failed.
-     */
-    private static void copy(final InputStream input, final File output)
-        throws IOException
-    {
-        final byte[] buffer = new byte[BUFFER_SIZE];
-        final FileOutputStream stream = new FileOutputStream(output);
-        try
-        {
-            int read;
-            while ((read = input.read(buffer)) != -1)
-            {
-                stream.write(buffer, 0, read);
-            }
-        }
-        finally
-        {
-            stream.close();
-        }
-    }
-
-    /**
      * Extracts a single library.
      *
      * @param platform
@@ -268,7 +235,7 @@ public final class Loader
             }
             try
             {
-                copy(stream, dest);
+                Files.copy(stream, dest.toPath());
             }
             finally
             {
