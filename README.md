@@ -1,8 +1,14 @@
-usb4java
+usb4java: USB library for Java based on libusb 1.0
 ========
+_Fork of usb4java/usb4java, using Maven groupId `io.calimero`_.
 
-USB library for Java based on libusb 1.0
-----------------------------------------
+#### Notable changes
+* Supports Windows and macOS on AArch64 / Apple Silicon
+* Supports Java 8 or later
+* Improved security for libusb4java temporary directory creation
+* Removes the commons-lang3 dependency
+
+-----
 
 Copyright (C) 2011 Klaus Reimer, k@ailis.de  
 Copyright (C) 2013 Luca Longinotti, l@longi.li
