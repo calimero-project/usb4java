@@ -194,12 +194,12 @@ public final class Loader
         final String lib)
     {
         // Extract the usb4java library
-        final String source = '/'
-            + Loader.class.getPackage().getName().replace('.', '/') + '/'
+        final String source =
+            Loader.class.getPackage().getName().replace('.', '/') + '/'
             + platform + "/" + lib;
 
         // Check if native library is present
-        final URL url = Loader.class.getResource(source);
+        final URL url = Loader.class.getClassLoader().getResource(source);
         if (url == null)
         {
             throw new LoaderException("Native library not found in classpath: "
@@ -227,7 +227,7 @@ public final class Loader
         final File dest = new File(createTempDirectory(), lib);
         try
         {
-            final InputStream stream = Loader.class.getResourceAsStream(source);
+            final InputStream stream = Loader.class.getClassLoader().getResourceAsStream(source);
             if (stream == null)
             {
                 throw new LoaderException("Unable to find " + source
